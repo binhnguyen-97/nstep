@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+Make a reusable `focusable` tailwind class here that gives a component a focus ring of purple-700 when it is
+***focus-visible***
+
+Bonus point 🎨: use @apply for everything.
+*/
