@@ -4,8 +4,7 @@ import reactLogo from '@/assets/react.svg';
 import tailwindLogo from '@/assets/tailwind.svg';
 import reactQueryLogo from '@/assets/react-query.svg';
 
-import { Countdown } from '@/features/countdown';
-import { CountdownMenu } from '@/features/countdownMenu';
+import { CountdownContainer } from '@/features/countdownContainer';
 import { Fruits } from '@/features/fruits';
 
 import './styles/globals.css';
@@ -35,8 +34,7 @@ function App() {
       </header>
       <h1 className="font-bold text-3xl my-8">NStep Frontend Challenge</h1>
       <QueryClientProvider client={queryClient}>
-        <Countdown />
-        <CountdownMenu />
+        <CountdownContainer />
         <Fruits />
       </QueryClientProvider>
 

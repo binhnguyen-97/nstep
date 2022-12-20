@@ -1,29 +1,41 @@
-import { useState } from "react";
+import { FC, useMemo } from 'react';
 
-/** This is kinda ugly, isn't it, maybe make it absolute import? */
-import { NstButton } from "../../components";
+import { NstButton } from '@/components/Button';
+import type { CountdownHookType } from '@/query/countdown';
 
-/**
- * Counter is an example of a simple business logic of a click-up counter.
- * ```
- * Click > increments counter.
- * ```
- * 
- * Requirements:
- * - Make the counter countdown from 30s by default.
- * - The countdown starts/pauses on click.
- * - Persist the current count in local so that it stays after refreshes.
- * - Redesign it in a user-friendly way so that it can reset when paused/finished.
- *
- * **BONUS POINT 🎁**: Make this default countdown customisable.
- * 
- * **BONUS BONUS POINT 🏎**: Add a little animation for the count down, to your liking.
- */
-export const Countdown = () => {
-  const [count, setCount] = useState(0);
+type CountdownProps = Pick<
+  CountdownHookType,
+  'countdown' | 'toggleCountdown' | 'counting' | 'resetCountdown'
+>;
+
+export const Countdown: FC<CountdownProps> = ({
+  toggleCountdown,
+  countdown,
+  counting,
+  resetCountdown,
+}) => {
+  const buttonTxt = counting ? 'Pause' : 'Start';
+
+  /**
+   * Pretending unnecessary rerender
+   */
+  const ctaGroup = useMemo(() => {
+    return (
+      <div className="grid grid-cols-2 gap-3">
+        <NstButton className="w-full" onClick={toggleCountdown}>
+          {buttonTxt}
+        </NstButton>
+        <NstButton hidden={counting} onClick={resetCountdown}>
+          Reset
+        </NstButton>
+      </div>
+    );
+  }, [counting]);
 
   return (
-    /** How to make this button accept all <button />-related props. */
-    <NstButton onClick={() => {}}>count is {count}</NstButton>
+    <div className="grid place-content-center text-center">
+      <p className="mt-10 text-lg font-bold">{countdown}</p>
+      {ctaGroup}
+    </div>
   );
 };
