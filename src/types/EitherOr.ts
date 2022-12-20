@@ -1,16 +1,21 @@
 /**
- * Often time you run into a scenario where a you would want either 1 out of 2 options, like an XOR gate.
- * Ref: https://en.wikipedia.org/wiki/XOR_gate (Wikipedia? Shame! 😅)
- *
- * Take this `Message` type for example, where it can either accept a text or an attachment. One is required, but not both.
- * ```ts
- * type Message = {
- *    text: string;
- *    attachment: File;
- *    timestamp?: number;
- * }
- * ```
- * 
- * Let's implement a EitherOr<T,U> utility type that can take care of this XOR logic.
+ * Simulate the not logic gate
+ * Which remove all the diff prop from T which mean !T
  */
-export type EitherOr<T, U> = {};
+type Not<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
+
+/**
+ * Implement the A!B + AB! from truth table
+ * A B EitherOr
+ * 1 1 0
+ * 1 0 1
+ * 0 1 1
+ * 0 0 0
+ *
+ * -> EitherOr = A!B + AB!
+ *
+ * First check if T,U is object type or not
+ * If yes, implement A!B + AB!
+ * If no, create an union type for that
+ */
+export type EitherOr<T, U> = (T | U) extends object ? (Not<T, U> & U) | (Not<U, T> & T) : T | U;
