@@ -1,4 +1,9 @@
 /// <reference types="vite/client" />
-/**
- * Make Vite env a bit more type-safe here if you can.
- */
+interface ImportMetaEnv {
+  readonly VITE_FRUIT_API_ENDPOINT: string
+  // more env variables...
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv
+}
