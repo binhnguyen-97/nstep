@@ -18,11 +18,20 @@ export const Fruits = () => {
     hasPrevious,
     previousPage,
     setPage,
+    isError,
   } = useFruits();
 
   const content = useMemo(() => {
     if (isLoading) {
       return <LoadingIndicator className="mt-5" />;
+    }
+
+    if (isError) {
+      return <p className="text-gray-500">Something went wrong</p>;
+    }
+
+    if (!fruits.length) {
+      return <p className="text-gray-500">No data</p>;
     }
 
     return (

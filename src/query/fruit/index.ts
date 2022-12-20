@@ -32,7 +32,7 @@ export const useFruits = () => {
     return data
   }
 
-  const { isLoading, data } = useQuery({
+  const { isLoading, isError, data } = useQuery({
     queryKey: ['fruitQuery'],
     queryFn: fruitFetched
   })
@@ -84,6 +84,7 @@ export const useFruits = () => {
     hasPrevious,
     previousPage,
     setPage,
+    isError
   }
 }
 
