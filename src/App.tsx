@@ -1,11 +1,16 @@
-import "./styles/globals.css";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import reactLogo from "./assets/react.svg";
-import tailwindLogo from "./assets/tailwind.svg";
-import reactQueryLogo from "./assets/react-query.svg";
+import reactLogo from '@/assets/react.svg';
+import tailwindLogo from '@/assets/tailwind.svg';
+import reactQueryLogo from '@/assets/react-query.svg';
 
-import { Countdown } from "./features/countdown";
-import { CountdownMenu } from "./features/countdownMenu";
+import { Countdown } from '@/features/countdown';
+import { CountdownMenu } from '@/features/countdownMenu';
+import { Fruits } from '@/features/fruits';
+
+import './styles/globals.css';
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
@@ -21,13 +26,19 @@ function App() {
           <img src={tailwindLogo} alt="Tailwind logo" className="w-16 h-16" />
         </a>
         <a href="https://tanstack.com/query" target="_blank">
-          <img src={reactQueryLogo} alt="React Query logo" className="w-16 h-16" />
+          <img
+            src={reactQueryLogo}
+            alt="React Query logo"
+            className="w-16 h-16"
+          />
         </a>
       </header>
       <h1 className="font-bold text-3xl my-8">NStep Frontend Challenge</h1>
-
-      <Countdown />
-      <CountdownMenu />
+      <QueryClientProvider client={queryClient}>
+        <Countdown />
+        <CountdownMenu />
+        <Fruits />
+      </QueryClientProvider>
 
       <p className="mt-8">
         See <code>README.md</code> in each folder.
